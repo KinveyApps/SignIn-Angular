@@ -1,0 +1,37 @@
+<!doctype html>
+<html ng-app="SignIn-Angular">
+<head>
+    <meta charset="utf-8">
+    <title>SignIn-Angular: Sign up</title>
+</head>
+<body>
+
+<div align="center" ng-controller="SignUpController">
+    <div>
+        <input type="text" ng-model="firstName" placeholder="First Name" style="position: relative"/>
+    </div>
+
+    <div>
+        <input type="text" ng-model="lastName" placeholder="Last Name" style="position: relative"/>
+    </div>
+
+    <div>
+        <input type="text" ng-model="email" placeholder="Email" style="position: relative"/>
+    </div>
+
+    <div>
+        <input type="password" ng-model="password" placeholder="Password" style="position: relative"/>
+    </div>
+
+    <div>
+        <button ng-click="signUp()">Create Account</button>
+    </div>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.min.js"></script>
+<script src="https://da189i1jfloii.cloudfront.net/js/kinvey-angular-1.1.4.min.js"></script>
+<script src="../scripts/app.js"></script>
+<script src="../scripts/sign_up.js"></script>
+</body>
+</html>

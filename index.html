@@ -1,0 +1,42 @@
+<!doctype html>
+<html ng-app="SignIn-Angular">
+<head>
+    <meta charset="utf-8">
+    <title>SignIn-Angular</title>
+</head>
+<body>
+
+<div align="center" ng-controller="LoginController">
+    <div>
+        <input type="text" ng-model="username" placeholder="Email" style="position: relative"/>
+    </div>
+
+    <div>
+        <input type="password" ng-model="password" placeholder="Password" style="position: relative"/>
+    </div>
+
+    <div>
+        <button ng-click="login()">Login</button>
+    </div>
+
+    <div>
+    <button onclick="window.location.href='templates/password_reset.html'">Forget password?</button>
+    </div>
+
+    <div>
+        <a>Don`t Have an Account?</a>
+    </div>
+    <div>
+     	<button onclick="window.location.href='templates/sing_up.html'">Sing Up</button>
+    </div>
+
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.min.js"></script>
+<script src="https://da189i1jfloii.cloudfront.net/js/kinvey-angular-1.1.4.min.js"></script>
+
+<script src="scripts/app.js"></script>
+<script src="scripts/login.js"></script>
+</body>
+</html>
