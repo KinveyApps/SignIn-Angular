@@ -1,37 +1,34 @@
-<!doctype html>
-<html ng-app="SignIn-Angular">
-<head>
-    <meta charset="utf-8">
-    <title>SignIn-Angular: Sign up</title>
-</head>
-<body>
-
 <div align="center" ng-controller="SignUpController">
-    <div>
-        <input type="text" ng-model="firstName" placeholder="First Name" style="position: relative"/>
-    </div>
+    <form name="registrationForm">
+        <div>
+            <input type="text" ng-model="firstName" placeholder="First Name" style="position: relative" required/>
+        </div>
+
+        <div>
+            <input type="text" ng-model="lastName" placeholder="Last Name" style="position: relative" required/>
+        </div>
+
+        <div>
+            <input type="email" name="email" ng-model="email" placeholder="Email" style="position: relative" required/>
+
+            <p class="help-block error" ng-show="registrationForm.email.$error.email">please enter a valid email</p>
+        </div>
+
+        <div>
+            <input type="password" ng-model="password" name="password" placeholder="Password" style="position: relative"
+                   ng-change="checkPassword()" required/>
+        </div>
+
+        <div>
+            <input type="password" ng-model="reenterPassword" name="reenterPassword" placeholder="Re-enter password"
+                   ng-change="checkPassword()" style="position: relative" required/>
+            <span class="text-error"
+                  ng-show="registrationForm.reenterPassword.$dirty && registrationForm.reenterPassword.$error.dontMatch">Passwords don't match!</span>
+        </div>
+    </form>
 
     <div>
-        <input type="text" ng-model="lastName" placeholder="Last Name" style="position: relative"/>
-    </div>
-
-    <div>
-        <input type="text" ng-model="email" placeholder="Email" style="position: relative"/>
-    </div>
-
-    <div>
-        <input type="password" ng-model="password" placeholder="Password" style="position: relative"/>
-    </div>
-
-    <div>
-        <button ng-click="signUp()">Create Account</button>
+        <button ng-click="signUp()" ng-disabled="registrationForm.$invalid">Create Account</button>
     </div>
 
 </div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.min.js"></script>
-<script src="https://da189i1jfloii.cloudfront.net/js/kinvey-angular-1.1.4.min.js"></script>
-<script src="../scripts/app.js"></script>
-<script src="../scripts/sign_up.js"></script>
-</body>
-</html>
