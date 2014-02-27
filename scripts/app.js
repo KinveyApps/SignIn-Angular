@@ -22,6 +22,7 @@ app.config(['$routeProvider', function($routeProvider) {
 	});
 }]);
 app.run(['$location', '$kinvey', '$rootScope', function($location, $kinvey, $rootScope) {
+
 	var promise = $kinvey.init({
 		appKey : 'kid_TP-o2paIWO',
 		appSecret : '6df2f442765741aa833f922ff548ec8b',
@@ -32,17 +33,12 @@ app.run(['$location', '$kinvey', '$rootScope', function($location, $kinvey, $roo
 		determineBehavior($kinvey, $location, $rootScope);
 	}, function(errorCallback) {
 		console.log("Kinvey init with error: " + JSON.stringify(errorCallback));
-		// TODO: sometimes strange errors
 		determineBehavior($kinvey, $location, $rootScope);
 	});
 }]);
 
 function determineBehavior($kinvey, $location, $rootScope) {
 	var activeUser = $kinvey.getActiveUser();
-	console.log("activeUser : " + JSON.stringify(activeUser) +  " username: " + activeUser.username);
-    var metadata = new $kinvey.Metadata(activeUser);
-    var status = metadata.getEmailVerification();
-	$rootScope.$broadcast('kinveyInitCallback', activeUser._id, status); 
 	console.log("$location.$$url: " + $location.$$url);
 	if (activeUser != null) {
 		console.log("activeUser not null determine behavior");

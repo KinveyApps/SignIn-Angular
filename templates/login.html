@@ -1,33 +1,64 @@
-<div align="center" ng-controller="LoginController">
+<div align="center">
+    <div style="width: 460px" align="center">
+        <div style="display: block" ng-controller="LoginController">
+            <form name="loginForm">
+                <h4>Login</h4>
 
-	<div>
-		<input type="text" ng-model="username" placeholder="Email" style="position: relative" />
-	</div>
+                <div class="blockInputLabel">
+                    <label style="padding-left: 60px;margin-right: -12px" for="login-email">Email:</label>
+                    <input style="margin-left: 30px" id="login-email" type="email" name="email" ng-model="username"
+                           placeholder="john@example.com"
+                           required/>
+                </div>
+                <div>
+                    <label style="margin-left: 27px;" for="login-password">Password:</label>
+                    <input style="margin-left: 18px" id="login-password" type="password" ng-model="password"
+                           placeholder="********" required/>
+                </div>
+            </form>
+            <div>
+                <button style="margin-right: 30px;margin-top: 15px" ng-click="login()" ng-disabled="loginForm.$invalid">
+                    Login
+                </button>
+            </div>
 
-	<div>
-		<input type="password" ng-model="password" placeholder="Password" style="position: relative" />
-	</div>
+            <div style="margin-top: 20px;margin-left: 27px">
+                <a ng-click="forgetPassword()">Forgot your password?</a>
+            </div>
 
-	<div>
-		<button ng-click="login()">Login</button>
-	</div>
-	<div>
-		<button ng-click="loginFacebook()">Login Facebook</button>
-	</div>
+        </div>
+        <hr>
+        <div ng-controller="SignUpController">
+            <h4>Signup</h4>
 
-	<div>
-		<button ng-click="loginTwitter()">Login Twitter</button>
-	</div>
+            <form ng-app="regForm" name="registrationForm">
+                <div class="blockInputLabel">
+                    <label style="padding-left: 60px;margin-right: -12px;" for="signup-email">Email:</label>
+                    <input id="signup-email" type="email" name="email" ng-model="email" placeholder="john@example.com"
+                           style=" margin-left: 30px;" required/>
+                </div>
 
-	<div>
-		<button ng-click="forgetPassword()">Forget password?</button>
-	</div>
+                <div>
+                    <label style="margin-left: 27px;" for="signup-password">Password:</label>
+                    <input id="signup-password" type="password" ng-model="password" name="password"
+                           placeholder="********"
+                           style="margin-left: 18px;"
+                           ng-change="checkPassword()" required/>
+                </div>
+            </form>
 
-	<div>
-		<a>Don`t Have an Account?</a>
-	</div>
-	<div>
-		<button ng-click="signUp()">Sign Up</button>
-	</div>
+            <div style="margin-right: 13px;margin-top: 30px;">
+                <button type="submit" ng-click="signUp()" ng-disabled="registrationForm.$invalid" disabled="disabled">
+                    Sign up
+                </button>
 
+            </div>
+
+            <div style="display: block">
+                <div style="margin-top: 20px" id="facebookButton" ng-click="loginFacebook()"></div>
+
+                <div id="twitterButton" ng-click="loginTwitter()"></div>
+            </div>
+        </div>
+    </div>
 </div>

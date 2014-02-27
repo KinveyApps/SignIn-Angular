@@ -1,15 +1,16 @@
-<div align="center" ng-controller="LoggedInController" >
+<div align="center"  ng-controller="LoggedInController" >
+    <div align="center"style="width: 400px;margin: 100px auto;">
+        <p style="text-align: center">Logged in as {{username}}</p>
+        <button ng-click="logout()">Logout</button>
+        <div style="margin-top: 50px" ng-show="showEmailVerification()">
+            <div>
+                <p>Before you can sign in, please check your email to active your user account. If you don't receive an
+                    email in
+                    a
+                    few seconds, please check your spam filters.</p>
+            </div>
 
-<p>Logged in as {{username}}</p>
-<button ng-click="logout()">Logout</button>
-<div id = "verifiDiv">
-    <div>
-        <p>Before you can sign in, please check your email to active your user account. If you don't receive an
-            email in
-            a
-            few seconds, please check your spam filters.</p>
+            <button ng-click="verifyEmail()">Send Verification Email</button>
+        </div>
     </div>
-    
-    <button ng-click="verifyEmail()">Send Verification Email</button>
-</div>
 </div>

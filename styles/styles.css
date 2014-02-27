@@ -1,0 +1,150 @@
+*{
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+input {
+    display: inline-block;
+    vertical-align: middle;
+    width: 223px;
+    height: 36px;
+    font-size: 16px;
+    padding: 5px 8px;
+    border: 1px solid #CCCCCC;
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #CCCCCC;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #CCCCCC;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #CCCCCC;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #CCCCCC;
+}
+
+input:focus {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border: 1px solid #5a5c60;
+    -webkit-box-shadow: 0 1px 1px 1px rgba(20, 20, 20, .2);
+    -moz-box-shadow: 0 1px 1px 1px rgba(20, 20, 20, .2);
+    box-shadow: 0 1px 1px 1px rgba(20, 20, 20, .2);
+    outline: 0
+}
+
+button {
+    color:#180E00;
+    font-size: 16px;
+    height: 34px;
+    padding-left: 12px;
+    padding-right: 12px;
+    background: linear-gradient(to top, #BB7200, #E38F11);
+    border: 1px solid #BE7400;
+    border-radius: 5%;
+}
+
+button:hover{
+    background: linear-gradient(to top, #CE7D00, #BB7200);
+}
+
+button:active {
+    background: #BB7200;
+    border: 1px solid #BE7400;
+}
+
+button[type=submit] {
+    color: #FFFFFF;
+    background: linear-gradient(to top, #13633A, #1B8F54);
+    border: 1px solid #13633A;
+}
+
+button[type=submit]:hover{
+    background: linear-gradient(to top, #187E4A, #156F41);
+    border: 1px solid #13633A;
+}
+
+button[type=submit]:active{
+    background: #156F41;
+}
+
+/*button[type=submit]:disabled {*/
+    /*color: gray;*/
+/*}*/
+
+label{
+    margin-bottom: 5px;
+    color: #5a5c60;
+}
+
+#facebookButton{
+    width: 274px;
+    height: 62px;
+    background: url('../images/sign_in_button_facebook.png') no-repeat scroll 0 0 transparent;
+    margin-top: 20px;
+}
+
+#twitterButton{
+    width: 274px;
+    height: 62px;
+    background: url('../images/sign_in_button_twitter.png') no-repeat scroll 0 0 transparent;
+    margin-top: 20px;
+}
+
+a {
+    color: #318CE8;
+    text-decoration: none;
+    font-size: 12px;
+    margin-top: -100px;
+}
+
+a:hover {
+    color: #1259A1;
+    text-decoration : underline;
+}
+
+.text-error{
+    color: red;
+    font-size: 13px;
+    /*height: 20px;*/
+    margin-top: -19px;
+    margin-bottom: 3px;
+}
+
+h4{
+    color: #3f4040;
+    margin: 24px 0 12px;
+    font-size: 20px;
+}
+
+h2{
+    margin: 24px 0 12px;
+    font-size: 36px;
+    line-height: 48px;
+    color: #3f4040;
+    display: block;
+    font-weight: bold;
+}
+
+.blockInputLabel{
+    margin-bottom: 30px;
+}
+
+p{
+    display: block;
+    font-size: 16px;
+    line-height: 24px;
+    color: #5a5c60;
+    text-align: left;
+}
+#resetPassP{
+
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    margin: 0;
+}

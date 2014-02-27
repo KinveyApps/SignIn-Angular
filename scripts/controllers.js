@@ -2,17 +2,24 @@ var controllers = angular.module('controllers', []);
 controllers.controller('LoginController', 
 		['$scope', '$kinvey', "$location", function($scope, $kinvey, $location) {
 			$scope.login = function () {
-				$kinvey.User.login({
-		            username: $scope.username,
-		            password: $scope.password
-		        }, {
-		            success: function (response) {
-		            	$location.path('/templates/logged_in');
-		            },
-		            error: function (error) {
-		                alert("Error login " +JSON.stringify(error));
-		            }
-		        });
+                checkExistUser($scope.username, $kinvey, function (isExistUser) {
+                    if (!isExistUser) {
+                        alert("User with this name don't exist");
+                    } else {
+                        var promise = $kinvey.User.login({
+                            username: $scope.username,
+                            password: $scope.password
+                        });
+                        promise.then(
+                            function (response) {
+                                $location.path('/templates/logged_in');
+                            },
+                            function (error) {
+//		                alert("Error login " +JSON.stringify(error));
+                                alert("Invalid credentials");
+                            });
+                    }
+                });
 			}
 			$scope.loginFacebook = function () {
 		        console.log("social login Facebook");
@@ -58,23 +65,30 @@ controllers.controller('LoginController',
 controllers.controller('ResetPasswordController', 
 		['$scope', '$kinvey', "$location", function($scope, $kinvey, $location) {
 		    $scope.resetPassword = function () {
-		    	$kinvey.User.resetPassword($scope.email, {
-		            success: function() {
-		            	console.log("resetPassword");
-		            	$location.path("templates/login");
-		            }
-		        });
+                var promise = $kinvey.User.resetPassword($scope.email);
+                promise.then(
+                    function () {
+                        console.log("resetPassword");
+                        $location.path("templates/login");
+                    });
 		    }
+
+            $scope.logIn = function () {
+                console.log("logIn");
+                $location.path("templates/login");
+            }
 		}]);
 controllers.controller('SignUpController', 
 		['$scope', '$kinvey', "$location", function($scope, $kinvey, $location) {
 			$scope.signUp = function () {
 				console.log("signup");
+                checkExistUser($scope.email, $kinvey, function (isExistUser) {
+                        if (isExistUser) {
+                            alert("User with this email already exist");
+                        } else {
 				var promise = $kinvey.User.signup({
 		             username: $scope.email,
 		             password: $scope.password,
-		             firstName: $scope.firstName,
-		             lastName: $scope.lastName,
 		             email: $scope.email
 		         });
 				console.log("signup promise");
@@ -88,40 +102,60 @@ controllers.controller('SignUpController',
 							alert("Signup error: " + error.description);
 						}
 				);
+                        }
+                });
 			}
-			
-			 $scope.checkPassword = function () {
-			        console.log($scope.password !== $scope.reenterPassword)
-			        $scope.registrationForm.reenterPassword.$error.dontMatch = $scope.password !== $scope.reenterPassword;
-			        $scope.registrationForm.password.$error.dontMatch = $scope.password !== $scope.reenterPassword;
-			    };
+
 		}]);
 controllers.controller('LoggedInController', 
 		['$scope', '$kinvey', '$location', function($scope, $kinvey, $location)  {
-			$scope.logout = function () {
-		        $kinvey.User.logout({
-		            success: function () {
-		                $kinvey.setActiveUser(null);
-		                $location.path("templates/login");
-		            },
-		            error: function (error) {
-		                alert("Error logout: " + JSON.stringify(error));
-		            }
-		        });
-		    }
+            $scope.logout = function () {
+                var promise = $kinvey.User.logout();
+                promise.then(
+                    function () {
+                        $kinvey.setActiveUser(null);
+                        $location.path("templates/login");
+                    },
+                    function (error) {
+                        alert("Error logout: " + JSON.stringify(error));
+                    });
+            }
+
 			$scope.verifyEmail = function () {
 			    var user = $kinvey.getActiveUser();
-			    $kinvey.User.verifyEmail(user.username, {
-			        success: function() {
-			            alert("success");
+			    var promise = $kinvey.User.verifyEmail(user.username);
+                promise.then(
+			        function() {
+			            alert("Email was sent");
 			        }
-			    });
+                );
 			}
-			$scope.username = $kinvey.getActiveUser()._id;
-			// TODO: handle email verification status behavior
-			$scope.$on('kinveyInitCallback', function(id, status){
-				console.log("$scope.$on: kinveyInitCallback username: " + username + " status: " + status);
-				// TODO: handle email verification status behavior
-				$scope.username = id;
-			});
-		}]);
+
+//			$scope.username = $kinvey.getActiveUser()._id;
+			$scope.username = $kinvey.getActiveUser().username;
+
+            $scope.showEmailVerification = function () {
+                var activeUser = $kinvey.getActiveUser();
+                if (activeUser != null) {
+                    var metadata = new $kinvey.Metadata(activeUser);
+                    var status = metadata.getEmailVerification();
+                    if (status === "confirmed") {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
+            }
+
+        }]);
+
+
+checkExistUser = function (username, $kinvey, callback) {
+    var promise = $kinvey.User.exists(username);
+    promise.then(
+        function (usernameExists) {
+            if (!!callback) {
+                callback(usernameExists);
+            }
+        });
+};
