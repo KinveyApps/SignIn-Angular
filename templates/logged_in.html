@@ -4,10 +4,12 @@
         <button ng-click="logout()">Logout</button>
         <div style="margin-top: 50px" ng-show="showEmailVerification()">
             <div>
-                <p>Before you can sign in, please check your email to active your user account. If you don't receive an
-                    email in
-                    a
-                    few seconds, please check your spam filters.</p>
+                <p>Email verification: manually trigger email verification from the app by clicking
+                    the button below. If you don't receive an email in a few seconds, please check
+                    your spam filters.
+                    Learn how to automatically trigger email verification on signup, customize the
+                    emails sent out, and customize the verification landing page on 
+                    <a class="loggedIn" href="http://devcenter.kinvey.com">Kinvey devcenter site</a>.</p>
             </div>
 
             <button ng-click="verifyEmail()">Send Verification Email</button>

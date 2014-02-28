@@ -139,7 +139,8 @@ controllers.controller('LoggedInController',
                 if (activeUser != null) {
                     var metadata = new $kinvey.Metadata(activeUser);
                     var status = metadata.getEmailVerification();
-                    if (status === "confirmed") {
+                    console.log("User email " + status + " " + activeUser.email);
+                    if (status === "confirmed" || !(!!activeUser.email)) {
                         return false;
                     } else {
                         return true;

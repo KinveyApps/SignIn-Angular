@@ -99,6 +99,7 @@ a {
     text-decoration: none;
     font-size: 12px;
     margin-top: -100px;
+    cursor: pointer;
 }
 
 a:hover {
@@ -133,12 +134,16 @@ h2{
     margin-bottom: 30px;
 }
 
-p{
+p {
     display: block;
     font-size: 16px;
     line-height: 24px;
     color: #5a5c60;
     text-align: left;
+}
+
+a.loggedIn {
+	font-size: 16px;
 }
 #resetPassP{
 
