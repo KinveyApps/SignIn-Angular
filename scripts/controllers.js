@@ -2,24 +2,38 @@ var controllers = angular.module('controllers', []);
 controllers.controller('LoginController', 
 		['$scope', '$kinvey', "$location", function($scope, $kinvey, $location) {
 			$scope.login = function () {
-                checkExistUser($scope.username, $kinvey, function (isExistUser) {
-                    if (!isExistUser) {
-                        alert("User with this name don't exist");
-                    } else {
+                var isFormInvalid = false;
+                if ($scope.loginForm.email.$error.email || $scope.loginForm.email.$error.required) {
+                    $scope.submittedEmail = true;
+                    isFormInvalid = true;
+                } else {
+                    $scope.submittedEmail = false;
+                }
+                if ($scope.loginForm.password.$error.required) {
+                    $scope.submittedPassword = true;
+                    isFormInvalid = true;
+                } else {
+                    $scope.submittedPassword = false;
+                }
+                if (isFormInvalid) {
+                    return;
+                }
+                console.log("call login");
                         var promise = $kinvey.User.login({
                             username: $scope.username,
                             password: $scope.password
                         });
                         promise.then(
                             function (response) {
+                                $scope.submittedError = false;
                                 $location.path('/templates/logged_in');
                             },
                             function (error) {
-//		                alert("Error login " +JSON.stringify(error));
-                                alert("Invalid credentials");
-                            });
-                    }
-                });
+                                $scope.submittedError = true;
+                                $scope.errorDescription = error.description;
+                                console.log("Error login " + error.description);//
+                            }
+                        );
 			}
 			$scope.loginFacebook = function () {
 		        console.log("social login Facebook");
@@ -30,10 +44,12 @@ controllers.controller('LoginController',
 		            function () {
 		                console.log("social login Facebook success");
 		                $location.path('/templates/logged_in');
+                        $scope.submittedFacebookError = false;
 		            },
 		            function (error) {
-		                console.log("social login Facebook error: " + error.description + " json: " + JSON.stringify(error));
-		                alert("Facebook login error : " + error.description);
+                        $scope.submittedFacebookError = true;
+                        $scope.errorDescription = error.description;
+		                console.log("social login Facebook error: " + error.description);
 		            }
 		        );
 		    }
@@ -44,12 +60,14 @@ controllers.controller('LoginController',
 		        });
 		        promise.then(
 		            function () {
+                        $scope.submittedTwitterError = false;
 		                console.log("social login Twitter success");
 		                $location.path('/templates/logged_in');
 		            },
 		            function (error) {
+                        $scope.submittedTwitterError = true;
+                        $scope.errorDescription = error.description;
 		                console.log("social login Twitter error: " + error.description + " json: " + JSON.stringify(error));
-		                alert("Twitter login error : " + error.description);
 		            }
 		        );
 		    }
@@ -64,14 +82,20 @@ controllers.controller('LoginController',
 		}]);
 controllers.controller('ResetPasswordController', 
 		['$scope', '$kinvey', "$location", function($scope, $kinvey, $location) {
-		    $scope.resetPassword = function () {
+            $scope.resetPassword = function () {
+                if ($scope.resetPasswordForm.email.$error.email || $scope.resetPasswordForm.email.$error.required) {
+                    $scope.submitted = true;
+                    return;
+                }else{
+                    $scope.submitted = false;
+                }
                 var promise = $kinvey.User.resetPassword($scope.email);
                 promise.then(
                     function () {
                         console.log("resetPassword");
                         $location.path("templates/login");
                     });
-		    }
+            }
 
             $scope.logIn = function () {
                 console.log("logIn");
@@ -82,10 +106,22 @@ controllers.controller('SignUpController',
 		['$scope', '$kinvey', "$location", function($scope, $kinvey, $location) {
 			$scope.signUp = function () {
 				console.log("signup");
-                checkExistUser($scope.email, $kinvey, function (isExistUser) {
-                        if (isExistUser) {
-                            alert("User with this email already exist");
-                        } else {
+                var isFormInvalid = false;
+                if ($scope.registrationForm.email.$error.email || $scope.registrationForm.email.$error.required) {
+                    $scope.submittedEmail = true;
+                    isFormInvalid = true;
+                } else {
+                    $scope.submittedEmail = false;
+                }
+                if ($scope.registrationForm.password.$error.required) {
+                    $scope.submittedPassword = true;
+                    isFormInvalid = true;
+                } else {
+                    $scope.submittedPassword = false;
+                }
+                if (isFormInvalid) {
+                    return;
+                }
 				var promise = $kinvey.User.signup({
 		             username: $scope.email,
 		             password: $scope.password,
@@ -94,18 +130,17 @@ controllers.controller('SignUpController',
 				console.log("signup promise");
 				promise.then(
 						function () {
+                            $scope.submittedError = false;
 							console.log("signup success");
 							$location.path("templates/logged_in");
 						}, 
 						function(error) {
+                            $scope.submittedError = true;
+                            $scope.errorDescription = error.description;
 							console.log("signup error: " + error.description);
-							alert("Signup error: " + error.description);
 						}
 				);
-                        }
-                });
 			}
-
 		}]);
 controllers.controller('LoggedInController', 
 		['$scope', '$kinvey', '$location', function($scope, $kinvey, $location)  {
@@ -130,8 +165,6 @@ controllers.controller('LoggedInController',
 			        }
                 );
 			}
-
-//			$scope.username = $kinvey.getActiveUser()._id;
 			$scope.username = $kinvey.getActiveUser().username;
 
             $scope.showEmailVerification = function () {
@@ -147,16 +180,4 @@ controllers.controller('LoggedInController',
                     }
                 }
             }
-
         }]);
-
-
-checkExistUser = function (username, $kinvey, callback) {
-    var promise = $kinvey.User.exists(username);
-    promise.then(
-        function (usernameExists) {
-            if (!!callback) {
-                callback(usernameExists);
-            }
-        });
-};
