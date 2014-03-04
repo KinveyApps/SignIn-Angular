@@ -1,7 +1,22 @@
+/**
+* Copyright (c) 2014 Kinvey Inc.
+* Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+* in compliance with the License. You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software distributed under the License
+* is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+* or implied. See the License for the specific language governing permissions and limitations under
+* the License.
+*
+*/
+var socialLoginType = null;
 var controllers = angular.module('controllers', []);
 controllers.controller('LoginController', 
 		['$scope', '$kinvey', "$location", function($scope, $kinvey, $location) {
 			$scope.login = function () {
+				console.log("socialLoginType: " + socialLoginType);
                 var isFormInvalid = false;
                 if ($scope.loginForm.email.$error.email || $scope.loginForm.email.$error.required) {
                     $scope.submittedEmail = true;
@@ -37,6 +52,7 @@ controllers.controller('LoginController',
 			}
 			$scope.loginFacebook = function () {
 		        console.log("social login Facebook");
+		        socialLoginType = 'facebook';
 		        var promise = $kinvey.Social.connect(null, 'facebook', {
 		            create: 'true'
 		        });
@@ -54,6 +70,7 @@ controllers.controller('LoginController',
 		        );
 		    }
 		    $scope.loginTwitter = function () {
+		    	socialLoginType = 'twitter';
 		        console.log("social login Twitter");
 		        var promise = $kinvey.Social.connect(null, 'twitter', {
 		            create: 'true'
@@ -145,15 +162,18 @@ controllers.controller('SignUpController',
 controllers.controller('LoggedInController', 
 		['$scope', '$kinvey', '$location', function($scope, $kinvey, $location)  {
             $scope.logout = function () {
-                var promise = $kinvey.User.logout();
-                promise.then(
-                    function () {
-                        $kinvey.setActiveUser(null);
-                        $location.path("templates/login");
-                    },
-                    function (error) {
-                        alert("Error logout: " + JSON.stringify(error));
-                    });
+            	if (socialLoginType != null) {
+            		var promise = Kinvey.Social.disconnect($kinvey.getActiveUser(), socialLoginType);
+                    promise.then( 
+                    		function() {
+                    			logout($kinvey, $location);
+    						},
+    						function(error) {
+    							alert("Error logout: " + JSON.stringify(error));
+    						});
+            	} else {
+            		logout($kinvey, $location);
+            	}
             }
 
 			$scope.verifyEmail = function () {
@@ -181,3 +201,16 @@ controllers.controller('LoggedInController',
                 }
             }
         }]);
+function logout($kinvey, $location) {
+	console.log("logout");
+	var promise = $kinvey.User.logout();
+    promise.then(
+        function () {
+            console.log("user logout");
+            $kinvey.setActiveUser(null);
+            $location.path("templates/login");
+        },
+        function (error) {
+            alert("Error logout: " + JSON.stringify(error));
+        });
+}

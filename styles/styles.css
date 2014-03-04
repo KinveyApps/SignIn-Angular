@@ -71,27 +71,9 @@ button[type=submit]:active{
     background: #156F41;
 }
 
-/*button[type=submit]:disabled {*/
-    /*color: gray;*/
-/*}*/
-
 label{
     margin-bottom: 5px;
     color: #5a5c60;
-}
-
-#facebookButton{
-    width: 274px;
-    height: 62px;
-    background: url('../images/sign_in_button_facebook.png') no-repeat scroll 0 0 transparent;
-    margin-top: 20px;
-}
-
-#twitterButton{
-    width: 274px;
-    height: 62px;
-    background: url('../images/sign_in_button_twitter.png') no-repeat scroll 0 0 transparent;
-    margin-top: 20px;
 }
 
 a {
@@ -107,12 +89,27 @@ a:hover {
     text-decoration : underline;
 }
 
-.text-error{
-    color: red;
-    font-size: 13px;
-    /*height: 20px;*/
-    margin-top: -19px;
-    margin-bottom: 3px;
+span{
+    color: #b94a48;
+    font-size: 12px;
+    height: 20px;
+    display: block;
+}
+
+span.resetPassword {
+    margin-top: -15px;
+    margin-bottom: 15px;
+    margin-left: 2px
+}
+
+span.login{
+    margin-top: 5px;
+    margin-left: 35px;
+    margin-bottom: -10px;
+}
+
+span.error{
+    margin-top: 5px;
 }
 
 h4{
@@ -152,4 +149,8 @@ a.loggedIn {
     -webkit-margin-start: 0px;
     -webkit-margin-end: 0px;
     margin: 0;
+}
+
+.error-style{
+    color: #b94a48;
 }
