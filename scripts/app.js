@@ -38,29 +38,23 @@ app.config(['$routeProvider', function($routeProvider) {
 app.run(['$location', '$kinvey', '$rootScope', function($location, $kinvey, $rootScope) {
 
 	var promise = $kinvey.init({
-		appKey : 'kid_TP-o2paIWO',
-		appSecret : '6df2f442765741aa833f922ff548ec8b',
-		refresh: true
-	});
+		appKey : 'MY_APP_KEY',
+        appSecret : 'MY_APP_SECRET',
+    });
 	promise.then(function() {
-		console.log("Kinvey init with success");
 		determineBehavior($kinvey, $location, $rootScope);
 	}, function(errorCallback) {
-		console.log("Kinvey init with error: " + JSON.stringify(errorCallback));
 		determineBehavior($kinvey, $location, $rootScope);
 	});
 }]);
 
 function determineBehavior($kinvey, $location, $rootScope) {
 	var activeUser = $kinvey.getActiveUser();
-	console.log("$location.$$url: " + $location.$$url);
 	if (activeUser != null) {
-		console.log("activeUser not null determine behavior");
 		if ($location.$$url != '/templates/logged_in') {
 			$location.path('/templates/logged_in');
 		}
 	} else {
-		console.log("activeUser null redirecting");
 		if ($location.$$url != '/templates/login') {
 			$location.path('/templates/login');
 		}
