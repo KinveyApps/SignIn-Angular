@@ -10,34 +10,34 @@
   or implied. See the License for the specific language governing permissions and limitations under
   the License.
  -->
-<div align="center">
-    <div style="width: 460px" align="center">
-        <div style="display: block" ng-controller="LoginController">
+<div class="center-align-div" xmlns="http://www.w3.org/1999/html">
+    <div id="main-login-div" >
+        <div class="block-div" ng-controller="LoginController">
             <form name="loginForm" novalidate>
                 <h4>Login</h4>
 
-                <div class="blockInputLabel">
-                    <label style="padding-left: 60px;margin-right: -12px" ng-class="{'error-style': submittedEmail}" for="login-email">Email:</label>
-                    <input style="margin-left: 30px" id="login-email" type="email" name="email" ng-class="{'error-style': submittedEmail}" ng-model="username"
+                <div class="block-input-label">
+                    <label id="login-email-label" ng-class="{'error-style': submittedEmail}" for="login-email">Email:</label>
+                    <input id="login-email" type="email" name="email" ng-class="{'error-style': submittedEmail}" ng-model="username"
                            placeholder="john@example.com"
                            required/>
-                    <span class="login" style="margin-left: 90px"  ng-show="submittedEmail">A valid email address is required.</span>
+                    <span class="login" id="login-span"  ng-show="submittedEmail">A valid email address is required.</span>
                 </div>
                 <div>
-                    <label style="margin-left: 27px;" ng-class="{'error-style': submittedPassword}" for="login-password">Password:</label>
-                    <input style="margin-left: 18px" id="login-password" type="password" name="password" ng-model="password" ng-class="{'error-style': submittedPassword}"
+                    <label class="password-label" ng-class="{'error-style': submittedPassword}" for="login-password">Password:</label>
+                    <input id="login-password" class="password-input" type="password" name="password" ng-model="password" ng-class="{'error-style': submittedPassword}"
                            placeholder="********" required/>
                     <span class="login"  ng-show="submittedPassword">A password is required.</span>
                 </div>
 
             <div>
-                <button style="margin-right: 30px;margin-top: 15px" ng-click="login()">
+                <button id="login-button" ng-click="login()">
                     Login
                 </button>
                 <span class="error" ng-show="submittedError">{{errorDescription}}</span>
             </div>
             </form>
-            <div style="margin-top: 20px;margin-left: 27px">
+            <div id="forget-password-div">
                 <a ng-click="forgetPassword()">Forgot your password?</a>
             </div>
 
@@ -47,24 +47,23 @@
             <h4>Signup</h4>
 
             <form name="registrationForm" novalidate>
-                <div class="blockInputLabel">
-                    <label style="padding-left: 60px;margin-right: -12px;" ng-class="{'error-style': submittedEmail}" for="signup-email">Email:</label>
+                <div class="block-input-label">
+                    <label id="signup-email-label" ng-class="{'error-style': submittedEmail}" for="signup-email">Email:</label>
                     <input id="signup-email" type="email" name="email" ng-class="{'error-style': submittedEmail}" ng-model="email" placeholder="john@example.com"
-                           style=" margin-left: 30px;" required/>
-                    <span class="login" style="margin-left: 90px"  ng-show="submittedEmail">A valid email address is required.</span>
+                          required/>
+                    <span class="login" id="signup-email-span"  ng-show="submittedEmail">A valid email address is required.</span>
                 </div>
 
                 <div>
-                    <label style="margin-left: 27px;" for="signup-password" ng-class="{'error-style': submittedPassword}">Password:</label>
-                    <input id="signup-password" type="password" ng-model="password" name="password" ng-class="{'error-style': submittedPassword}"
+                    <label class="password-label" for="signup-password" ng-class="{'error-style': submittedPassword}">Password:</label>
+                    <input id="signup-password" class="password-input" type="password" ng-model="password" name="password" ng-class="{'error-style': submittedPassword}"
                            placeholder="********"
-                           style="margin-left: 18px;"
                            ng-change="checkPassword()" required/>
                     <span class="login"  ng-show="submittedPassword">A password is required.</span>
                 </div>
 
 
-            <div style="margin-right: 13px;margin-top: 30px;">
+            <div id="signup_button-div">
                 <button type="submit" ng-click="signUp()">
                     Sign up
                 </button>
@@ -72,11 +71,11 @@
             </div>
             </form>
 
-            <div style="display: block">
-            	<a class="zocial facebook" style="margin-top: 20px" ng-click="loginFacebook()" >Sign in with Facebook</a>
+            <div class="block-div">
+            	<button  id="facebook-button"  ng-click="loginFacebook()" ></button>
                 <span class="error" ng-show="submittedFacebookError">{{errorDescription}}</span>
 
-				<a class="zocial twitter" style="margin-top: 20px" ng-click="loginTwitter()" >Sign in with Twitter</a>
+				<button id="twitter-button"  ng-click="loginTwitter()" ></button>
                 <span class="error" ng-show="submittedTwitterError">{{errorDescription}}</span>
             </div>
         </div>

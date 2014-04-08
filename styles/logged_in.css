@@ -1,0 +1,11 @@
+a.logged-in {
+    font-size: 16px;
+}
+
+#logged-as-label {
+    text-align: center;
+}
+
+#verification-div {
+    margin-top: 50px
+}

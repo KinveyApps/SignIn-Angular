@@ -10,18 +10,18 @@
   or implied. See the License for the specific language governing permissions and limitations under
   the License.
  -->
-<div align="center" ng-controller="LoggedInController" >
-    <div align="center"style="width: 400px;margin: 100px auto;">
-        <p style="text-align: center">Logged in as {{username}}</p>
+<div class="center-align-div"  ng-controller="LoggedInController" >
+    <div class="main-div">
+        <p id="logged-as-label">Logged in as {{username}}</p>
         <button ng-click="logout()">Logout</button>
-        <div style="margin-top: 50px" ng-show="showEmailVerification()">
+        <div id="verification-div" ng-show="showEmailVerification()">
             <div>
                 <p>Email verification: manually trigger email verification from the app by clicking
                     the button below. If you don't receive an email in a few seconds, please check
                     your spam filters.
                     Learn how to automatically trigger email verification on signup, customize the
                     emails sent out, and customize the verification landing page on 
-                    <a class="loggedIn" href="http://devcenter.kinvey.com">Kinvey devcenter site</a>.</p>
+                    <a class="logged-in" href="http://devcenter.kinvey.com">Kinvey devcenter site</a>.</p>
             </div>
 
             <button ng-click="verifyEmail()">Send Verification Email</button>

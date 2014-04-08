@@ -96,39 +96,8 @@ span{
     display: block;
 }
 
-span.resetPassword {
-    margin-top: -15px;
-    margin-bottom: 15px;
-    margin-left: 2px
-}
-
-span.login{
-    margin-top: 5px;
-    margin-left: 35px;
-    margin-bottom: -10px;
-}
-
 span.error{
     margin-top: 5px;
-}
-
-h4{
-    color: #3f4040;
-    margin: 24px 0 12px;
-    font-size: 20px;
-}
-
-h2{
-    margin: 24px 0 12px;
-    font-size: 36px;
-    line-height: 48px;
-    color: #3f4040;
-    display: block;
-    font-weight: bold;
-}
-
-.blockInputLabel{
-    margin-bottom: 30px;
 }
 
 p {
@@ -139,18 +108,15 @@ p {
     text-align: left;
 }
 
-a.loggedIn {
-	font-size: 16px;
-}
-#resetPassP{
-
-    -webkit-margin-before: 1em;
-    -webkit-margin-after: 1em;
-    -webkit-margin-start: 0px;
-    -webkit-margin-end: 0px;
-    margin: 0;
-}
-
 .error-style{
     color: #b94a48;
 }
+
+.main-div {
+    width: 400px;
+    margin: 100px auto;
+}
+.center-align-div{
+    text-align: center
+}
+

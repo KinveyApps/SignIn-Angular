@@ -178,30 +178,10 @@ Apache License
 
 Summary:
 
-   * zocial.css [MIT] - styles for social buttons
-
-
-SECTION 1: BSD-STYLE, MIT-STYLE, OR SIMILAR STYLE LICENSES
-   >>> zocial.css
-
-SECTION 2: Apache License, V2.0
+SECTION 1: Apache License, V2.0
    >>> kinvey
 
-
---------------- SECTION 1: BSD-STYLE, MIT-STYLE, OR SIMILAR STYLE LICENSES ----------
-
-BSD-STYLE, MIT-STYLE, OR SIMILAR STYLE is applicable to the following component(s).
-
->>> zocial.css
-
-	Zocial Butons
-	http://zocial.smcllns.com
-	by Sam Collins (@smcllns)
-	License: http://opensource.org/licenses/mit-license.php
-	
-	You are free to use and modify, as long as you keep this license comment intact or link back to zocial.smcllns.com on your site.
-
---------------- SECTION 2: Apache License, V2.0 ----------
+--------------- SECTION 1: Apache License, V2.0 ----------
 
 Apache License, V2.0 is applicable to the following component(s).
 

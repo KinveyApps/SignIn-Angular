@@ -1,0 +1,108 @@
+body:after {
+    content: url('../images/twitter_released.png') url('../images/facebook_released.png') url('../images/twitter_focus.png') url('../images/facebook_focus.png') url('../images/twitter_pressed.png') url("../images/facebook_pressed.png");
+    display: none;
+}
+
+h4{
+    color: #3f4040;
+    margin: 24px 0 12px;
+    font-size: 20px;
+}
+
+span.login{
+    margin-top: 5px;
+    margin-left: 35px;
+    margin-bottom: -10px;
+}
+
+#main-login-div{
+    width: 460px;
+    margin: auto;
+}
+
+.block-div {
+    display: block;
+}
+
+#login-email-label {
+    padding-left: 60px;
+    margin-right: -12px
+}
+
+#login-email{
+    margin-left: 30px
+}
+
+#login-span{
+    margin-left: 90px
+}
+
+.password-label {
+    margin-left: 27px
+}
+
+.password-input{
+    margin-left: 18px
+}
+
+#login-button{
+    margin-right: 30px;
+    margin-top: 15px
+}
+
+#forget-password-div{
+    margin-top: 20px;
+    margin-left: 27px
+}
+
+#signup-email-label{
+    padding-left: 60px;
+    margin-right: -12px;
+}
+
+#signup-email{
+    margin-left: 30px;
+}
+
+#signup-email-span{
+    margin-left: 90px
+}
+
+#signup_button-div{
+    margin-right: 13px;
+    margin-top: 30px;
+}
+
+#twitter-button{
+    margin-top: 20px;
+    width: 232px;
+    border: none;
+    background-image: url('../images/twitter_released.png');
+}
+
+#facebook-button{
+    margin-top: 20px;
+    width: 240px;
+    border: none;
+    background-image: url('../images/facebook_released.png');
+}
+
+#twitter-button:hover{
+    background-image: url('../images/twitter_focus.png');
+}
+
+#facebook-button:hover{
+    background-image: url('../images/facebook_focus.png');
+}
+
+#twitter-button:active{
+    background-image: url('../images/twitter_pressed.png');
+}
+
+#facebook-button:active{
+    background-image: url("../images/facebook_pressed.png");
+}
+
+.block-input-label {
+    margin-bottom: 30px;
+}
